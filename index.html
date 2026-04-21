@@ -152,13 +152,23 @@ header {
     <h2>Resultados Reais</h2>
     <p>Veja o que os nossos alunos dizem sobre a metodologia:</p>
     
-    <div class="video-grid">
-        <div class="video-card">
-            <div class="video-container">
+    <section class="video-section">
+            <h2>Veja o Nero em ação (IA e TI)</h2>
+            <div class="video-inline-wrap" id="driveVideoWrap">
+                <button type="button" class="video-inline-trigger" id="driveTrigger" aria-label="Reproduzir vídeo no site">
+                    <span class="thumb-placeholder" aria-hidden="true"></span>
+                    <span class="play-overlay" aria-hidden="true">
+                        <span class="play-btn">▶</span>
+                    </span>
+                    <span class="label"><strong>Clique para assistir</strong></span>
+                </button>
+                <div class="video-inline-player" id="drivePlayer">
+                    <div class="player-wrap">
                         <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview" title="Vídeo NeroTec" allow="autoplay" allowfullscreen></iframe>
+                    </div>
+                    <button type="button" class="close-player" id="driveClose">Fechar vídeo</button>
+                </div>
             </div>
-            <p><strong>Maria S.</strong> - "Perdi 5kg em 3 semanas!"</p>
-        </div>
 
         <div class="video-card">
             <div class="video-container">
