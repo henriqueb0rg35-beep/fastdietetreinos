@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<style>
+/* Configurações Gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Layout Responsivo (Flexbox) */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Faz os itens "pularem" para a linha de baixo no telemóvel */
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Estilo dos Cards de Produto */
+.card {
+    background: white;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.preco {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* Botões */
+.btn-kiwify, .btn-whatsapp {
+    display: block;
+    padding: 12px;
+    margin-top: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.btn-kiwify { background-color: #5f27cd; } /* Roxo Kiwify */
+.btn-whatsapp { background-color: #25d366; } /* Verde WhatsApp */
+
+/* Ajuste para telas pequenas */
+@media (max-width: 600px) {
+    .card {
+        width: 100%; /* No telemóvel, o card ocupa a largura toda */
+    }
+}
+
+/* Seção de Depoimentos */
+.depoimentos {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Espaço entre os vídeos */
+    margin-top: 30px;
+}
+
+.video-card {
+    width: 45%; /* No computador, mostra 2 por linha */
+    min-width: 300px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Truque para o vídeo ser responsivo (16:9) */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de vídeo comum */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Ajuste para Telemóvel */
+@media (max-width: 600px) {
+    .video-card {
+        width: 100%; /* No telemóvel, ocupa a largura toda */
+    }
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria Health & Shape</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Health & Shape</h1>
+        <p>Emagrecimento com acompanhamento profissional</p>
+    </header>
+
+    <main class="container">
+        
+        <section class="card">
+            <img src="https://via.placeholder.com/300x180?text=Consultoria+Fitness" alt="Consultoria">
+            <h2>Mentoria de Treino VIP</h2>
+            <p>Acesso a vídeos e PDFs exclusivos com profissionais da saúde.</p>
+            <p class="preco">Até 12x de R$ 17,90</p>
+            <a href="https://pay.kiwify.com.br/SEU_LINK" class="btn-kiwify">Compre AGORA</a>
+        </section>
+
+        <section class="card">
+            <img src="https://via.placeholder.com/300x180?text=Produto+Emagrecimento" alt="Produto">
+            <h2>Combo Emagrecimento</h2>
+            <p>Suplementação regularizada para acelerar os seus resultados.</p>
+            <p class="preco">Consultar Preço</p>
+            <a href="https://wa.me/SEUNUMERO?text=Olá! Tenho interesse no Combo Emagrecimento." class="btn-whatsapp">Converse com o Vendedor</a>
+        </section>
+
+	<section class="depoimentos">
+    <h2>Resultados Reais</h2>
+    <p>Veja o que os nossos alunos dizem sobre a metodologia:</p>
+    
+    <div class="video-grid">
+        <div class="video-card">
+            <div class="video-container">
+                        <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview" title="Vídeo NeroTec" allow="autoplay" allowfullscreen></iframe>
+            </div>
+            <p><strong>Maria S.</strong> - "Perdi 5kg em 3 semanas!"</p>
+        </div>
+
+        <div class="video-card">
+            <div class="video-container">
+                        <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview" title="Vídeo NeroTec" allow="autoplay" allowfullscreen></iframe>
+            </div>
+            <p><strong>João P.</strong> - "A consultoria mudou o meu treino."</p>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Health & Shape - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
