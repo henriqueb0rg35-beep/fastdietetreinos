@@ -5,64 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Diet e Treinos - Oficial</title>
     <style>
-        /* CSS INTEGRADO PARA FACILITAR O UPLOAD */
+        /* BASE E LAYOUT */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; }
         header { background-color: #1a2a3a; color: white; text-align: center; padding: 50px 20px; }
         .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; max-width: 1200px; margin: 0 auto; }
         
-        /* Cards de Produtos */
-        .card { background: white; width: 320px; margin: 15px; padding: 0; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; overflow: hidden; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
+        /* CARDS DE PRODUTOS */
+        .card { background: white; width: 320px; margin: 15px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; overflow: hidden; transition: 0.3s; }
         .img-produto { width: 100%; height: 220px; object-fit: cover; }
         .card-content { padding: 20px; }
         .preco { font-size: 1.4em; font-weight: bold; color: #2ecc71; margin: 10px 0; }
         
-        /* Botões */
-        .btn { display: block; padding: 15px; margin: 10px 0; text-decoration: none; border-radius: 8px; font-weight: bold; color: white; transition: 0.2s; }
+        /* BOTÕES */
+        .btn { display: block; padding: 15px; margin: 10px 0; text-decoration: none; border-radius: 8px; font-weight: bold; color: white; }
         .btn-kiwify { background-color: #6c5ce7; }
-        .btn-kiwify:hover { background-color: #5849c4; }
         .btn-whatsapp { background-color: #25d366; }
-        .btn-whatsapp:hover { background-color: #1ebd5b; }
 
-        /* Seção de Depoimentos */
+        /* SEÇÃO DE DEPOIMENTOS (ESTILO NEROTEC) */
         .depoimentos { background-color: #ffffff; padding: 60px 20px; text-align: center; }
         .video-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 30px; }
-        .video-card { width: 45%; min-width: 320px; background: #fff; border-radius: 12px; overflow: hidden; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-card { width: 45%; min-width: 320px; text-align: center; }
 
-        footer { background: #1a2a3a; color: #ccc; text-align: center; padding: 20px; font-size: 0.9em; }
+        /* VÍDEO WRAPPER - Lógica NeroTec */
+        .video-inline-wrap { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 0 25px rgba(0,0,0,0.1); background: #1a1a1a; }
+        
+        .video-inline-trigger {
+            display: block; width: 100%; cursor: pointer; position: relative; border: 2px solid #ddd;
+            background: #2c3e50; padding: 0; aspect-ratio: 16/9; transition: 0.3s;
+        }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .video-card { width: 100%; }
-            .card { width: 100%; }
-        }/* Estilos do Gatilho do Vídeo */
-.video-inline-wrap { position: relative; width: 100%; border-radius: 8px; overflow: hidden; background: #000; }
+        .video-inline-trigger:hover { border-color: #6c5ce7; }
 
-.video-inline-trigger {
-    width: 100%; height: 200px; border: none; background: #333; cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;
-}
+        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
+        .play-btn { 
+            width: 70px; height: 70px; border-radius: 50%; background: #6c5ce7; 
+            border: 3px solid white; display: flex; align-items: center; justify-content: center; 
+            font-size: 2em; color: white; 
+        }
 
-.play-overlay {
-    background: rgba(108, 92, 231, 0.8); width: 60px; height: 60px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
-}
+        .video-inline-player { display: none; background: #000; }
+        .video-inline-player.is-open { display: block; }
+        
+        .player-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
+        .player-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-.play-btn { font-size: 24px; margin-left: 5px; }
+        .close-player {
+            width: 100%; padding: 10px; background: #f8d7da; border: none;
+            color: #721c24; cursor: pointer; font-weight: bold;
+        }
 
-/* Esconder o player inicialmente */
-.video-inline-player { display: none; position: relative; }
-.video-inline-player.active { display: block; }
+        /* Esconder o botão quando o vídeo carrega */
+        .video-inline-wrap.is-playing .video-inline-trigger { display: none; }
 
-.player-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
-.player-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        footer { background: #1a2a3a; color: #ccc; text-align: center; padding: 20px; margin-top: 40px; }
 
-.close-player {
-    width: 100%; background: #e74c3c; color: white; border: none; padding: 10px;
-    cursor: pointer; font-weight: bold;
-}
+        @media (max-width: 768px) { .video-card, .card { width: 100%; } }
     </style>
 </head>
 <body>
@@ -74,99 +71,95 @@
 
     <main class="container">
         <section class="card">
-            <img src="images/project1.jpeg" alt="Mentoria de Treino" class="img-produto">
+            <img src="images/project1.jpeg" alt="Mentoria" class="img-produto">
             <div class="card-content">
                 <h2>Mentoria de Treino VIP</h2>
-                <p>Treinos personalizados em vídeo e PDF com especialistas.</p>
-                <p class="preco">12x de R$19,90 ou à vista por 209,90</p>
+                <p class="preco">12x de R$19,90</p>
                 <a href="https://pay.kiwify.com.br/SEU_LINK" class="btn btn-kiwify">Compre AGORA</a>
             </div>
         </section>
-
         <section class="card">
-            <img src="images/project1.jpeg" alt="Produto Emagrecedor" class="img-produto">
+            <img src="images/project1.jpeg" alt="Produto" class="img-produto">
             <div class="card-content">
                 <h2>Combo Emagrecimento</h2>
-                <p>Suplementação aprovada para resultados rápidos.</p>
                 <p class="preco">Fale connosco</p>
-                <a href="https://wa.me/SEUNUMERO?text=Tenho+interesse+no+Combo" class="btn btn-whatsapp">Converse com o Vendedor</a>
+                <a href="https://wa.me/SEUNUMERO" class="btn btn-whatsapp">Converse no WhatsApp</a>
             </div>
         </section>
     </main>
 
-<section class="depoimentos">
-    <h2>Resultados de Quem Acreditou</h2>
-    <div class="video-grid">
-        
-        <div class="video-card">
-            <div class="video-inline-wrap">
-                <button type="button" class="video-inline-trigger" aria-label="Assistir depoimento">
-                    <span class="play-overlay">
-                        <span class="play-btn">▶</span>
-                    </span>
-                    <span class="label"><strong>Ver Depoimento do João</strong></span>
-                </button>
-                <div class="video-inline-player">
-                    <div class="player-wrap">
-                        <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview" allow="autoplay" allowfullscreen></iframe>
+    <section class="depoimentos">
+        <h2>Resultados de Quem Acreditou</h2>
+        <div class="video-grid">
+            
+            <div class="video-card">
+                <div class="video-inline-wrap">
+                    <button type="button" class="video-inline-trigger">
+                        <span class="play-overlay"><span class="play-btn">▶</span></span>
+                        <span style="position:absolute; bottom:10px; width:100%; color:white;">Clique para assistir</span>
+                    </button>
+                    <div class="video-inline-player">
+                        <div class="player-wrap">
+                            <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview"></iframe>
+                        </div>
+                        <button type="button" class="close-player">Fechar vídeo</button>
                     </div>
-                    <button type="button" class="close-player">Fechar vídeo</button>
                 </div>
+                <p><strong>João P.</strong> - Transformação em 30 dias.</p>
             </div>
-            <p><strong>João P.</strong> - "A consultoria mudou o meu treino."</p>
-        </div>
 
-        <div class="video-card">
-            <div class="video-inline-wrap">
-                <button type="button" class="video-inline-trigger" aria-label="Assistir depoimento">
-                    <span class="play-overlay">
-                        <span class="play-btn">▶</span>
-                    </span>
-                    <span class="label"><strong>Ver Depoimento da Maria</strong></span>
-                </button>
-                <div class="video-inline-player">
-                    <div class="player-wrap">
-                        <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview" allow="autoplay" allowfullscreen></iframe>
+            <div class="video-card">
+                <div class="video-inline-wrap">
+                    <button type="button" class="video-inline-trigger">
+                        <span class="play-overlay"><span class="play-btn">▶</span></span>
+                        <span style="position:absolute; bottom:10px; width:100%; color:white;">Clique para assistir</span>
+                    </button>
+                    <div class="video-inline-player">
+                        <div class="player-wrap">
+                            <iframe src="about:blank" data-src="https://drive.google.com/file/d/1C-hpFgKdxBc4UnoXjsd9yT8qMxXUfUem/preview"></iframe>
+                        </div>
+                        <button type="button" class="close-player">Fechar vídeo</button>
                     </div>
-                    <button type="button" class="close-player">Fechar vídeo</button>
                 </div>
+                <p><strong>Maria S.</strong> - Resultados reais.</p>
             </div>
-            <p><strong>Maria S.</strong> - "Perdi 5kg em 3 semanas!"</p>
-        </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
     <footer>
-        <p>&copy; 2024 Fast Diet e Treinos. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Fast Diet e Treinos. Londrina-PR.</p>
     </footer>
-<script>
-    document.querySelectorAll('.video-inline-trigger').forEach(button => {
-        button.addEventListener('click', function() {
-            const wrap = this.parentElement;
-            const player = wrap.querySelector('.video-inline-player');
-            const iframe = player.querySelector('iframe');
-            
-            // Ativa o player e carrega o link do vídeo
-            player.classList.add('active');
-            iframe.src = iframe.getAttribute('data-src');
-            this.style.display = 'none'; // Esconde o botão de play
-        });
-    });
 
-    document.querySelectorAll('.close-player').forEach(button => {
-        button.addEventListener('click', function() {
-            const player = this.parentElement;
-            const wrap = player.parentElement;
-            const iframe = player.querySelector('iframe');
-            const trigger = wrap.querySelector('.video-inline-trigger');
-            
-            // Esconde o player e "limpa" o vídeo
-            player.classList.remove('active');
-            iframe.src = 'about:blank';
-            trigger.style.display = 'flex';
+    <script>
+        // Lógica Adaptada da NeroTec para Múltiplos Vídeos
+        document.querySelectorAll('.video-inline-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const wrap = this.closest('.video-inline-wrap');
+                const player = wrap.querySelector('.video-inline-player');
+                const iframe = wrap.querySelector('iframe');
+                
+                wrap.classList.add('is-playing');
+                player.classList.add('is-open');
+                
+                if (iframe && iframe.getAttribute('data-src')) {
+                    iframe.src = iframe.getAttribute('data-src');
+                }
+            });
         });
-    });
-</script>
+
+        document.querySelectorAll('.close-player').forEach(button => {
+            button.addEventListener('click', function() {
+                const wrap = this.closest('.video-inline-wrap');
+                const player = wrap.querySelector('.video-inline-player');
+                const iframe = wrap.querySelector('iframe');
+                
+                wrap.classList.remove('is-playing');
+                player.classList.remove('is-open');
+                
+                if (iframe) iframe.src = 'about:blank';
+            });
+        });
+    </script>
 </body>
 </html>
